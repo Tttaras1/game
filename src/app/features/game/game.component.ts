@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import { GameService } from './game.service';
 import { takeWhile } from 'rxjs/operators';
-import { GameSettingsComponent } from './game-settings/game-settings.component';
 
 @Component({
 	selector: 'app-game',
@@ -12,6 +11,8 @@ export class GameComponent implements OnInit {
 	private alive = true;
 	private isGameActive = false;
 	private fields = [];
+	private isModalActive: boolean = false;
+	private modalText: string;
 	public currentField: number = 0;
 	public lostFields: number[] = [];
 	public wonFields: number[] = [];
@@ -19,7 +20,6 @@ export class GameComponent implements OnInit {
 	public timerId;
 
 	@ViewChild('boardRef', {static: false}) boardRef: ElementRef;
-	@ViewChildren('GameSettingsComponent') gameSettingsComponent: GameSettingsComponent; 
 
 	constructor(
 		private GameService: GameService,
@@ -118,12 +118,21 @@ export class GameComponent implements OnInit {
 
 	hanldeEndOfTheGame():void {
 		if (this.wonFields.length === 10) {
-			alert('Congrats')
+			this.showModal('Congratulations! You are a winner!');
 		} else { 
-			alert('You loose')
+			this.showModal('Game over!');
 		}
-		this.resetAllGameData();
 	}
+
+	showModal(text: string): void {
+		this.isModalActive = true;
+		this.modalText = text;
+	}
+
+	closeModal(): void {
+		this.isModalActive = false;
+	}
+
 	resetAllGameData(): void {
 		clearTimeout(this.timerId)
 		this.fields = [];
@@ -131,6 +140,7 @@ export class GameComponent implements OnInit {
 		this.isFirstIteration = true;
 		this.wonFields = [];
 		this.lostFields = [];
+		this.closeModal();
 	}
 
 	get isGameEnded(): boolean {

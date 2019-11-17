@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ErrorMessageModule } from './error-message/error-message.module';
+import { ModalModule } from './modal/modal.module';
 
 
 
@@ -9,9 +10,11 @@ import { ErrorMessageModule } from './error-message/error-message.module';
   imports: [
     CommonModule,
     ErrorMessageModule,
+    ModalModule
   ],
   exports: [
-    ErrorMessageModule
+    ErrorMessageModule,
+    ModalModule
   ]
 })
 export class SharedModule { }

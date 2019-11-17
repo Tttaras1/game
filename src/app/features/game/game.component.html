@@ -11,3 +11,5 @@
         </ng-container>
     </div>
 </div>
+
+<app-modal (onConfirmClicked)="resetAllGameData()" *ngIf="isModalActive" [text]="modalText"></app-modal>
