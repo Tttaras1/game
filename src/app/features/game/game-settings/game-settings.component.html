@@ -2,7 +2,7 @@
 <form [formGroup]="settings" class="form-settings" (ngSubmit)="startGame()">
 
     <div class="form-settings__time">
-        <label for="time">Time:</label>
+        <label for="time">Interval:</label>
         <input
             id="time"
             formControlName="time"
@@ -17,6 +17,6 @@
     <div class="form-settings__start">
         <input
             type="submit"
-            class="form-settings__start-button" value="Start">
+            class="form-settings__start-button" value="Start"/>
     </div>
 </form>

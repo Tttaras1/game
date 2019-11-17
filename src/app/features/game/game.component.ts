@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import { GameService } from './game.service';
 import { takeWhile } from 'rxjs/operators';
-import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { GameSettingsComponent } from './game-settings/game-settings.component';
 
 @Component({
 	selector: 'app-game',
@@ -9,10 +9,9 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@ang
 	styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-	private alive: boolean = true;
-	private isGameActive: boolean = false;
-	private gameBoard: FormGroup;
-	private fields: Object[] = [];
+	private alive = true;
+	private isGameActive = false;
+	private fields = [];
 	public currentField: number = 0;
 	public lostFields: number[] = [];
 	public wonFields: number[] = [];
@@ -20,16 +19,13 @@ export class GameComponent implements OnInit {
 	public timerId;
 
 	@ViewChild('boardRef', {static: false}) boardRef: ElementRef;
+	@ViewChildren('GameSettingsComponent') gameSettingsComponent: GameSettingsComponent; 
 
 	constructor(
 		private GameService: GameService,
-        private fb: FormBuilder,
 	) { }
 
 	ngOnInit() {
-		this.gameBoard = this.fb.group({
-			radioArray: this.fb.array([]),
-		})
 		this.initSubscriptions()
 	}
 
@@ -47,9 +43,7 @@ export class GameComponent implements OnInit {
 
 	initBoard() {
 		for (let i = 0; i < 100; i++) {
-			const control = this.fb.control(false)
 			this.fields.push(this.createField(i));
-			this.radioArr.push(control);
 		}
 		
 		this.timerId = setInterval(() => this.gameStart(), this.GameService.time)
@@ -63,12 +57,7 @@ export class GameComponent implements OnInit {
 
 	getCurrentField():HTMLElement {
 		this.currentField = this.getRandomNumber();
-		let element = this.getField([this.currentField]);
-		
-		if (element.tagName === "INPUT") {
-			element = this.getField([--this.currentField]);
-		}
-
+		let element = this.getField(this.currentField);
 		if (this.wonFields.includes(this.currentField) ||
 			this.lostFields.includes(this.currentField)) {
 			element = this.getCurrentField();
@@ -81,12 +70,7 @@ export class GameComponent implements OnInit {
 		return this.boardRef.nativeElement.children[id]
 	}
 
-	ngOnDestroy(): void {
-		this.alive = false
-	}
-
 	gameStart(): void {
-		
 		this.getField([this.currentField])
 			.classList.remove('game-board__card-container--active')
 
@@ -95,8 +79,8 @@ export class GameComponent implements OnInit {
 			return;
 		}
 
-		if (!this.wonFields.includes(this.currentField / 2) && !this.isFirstIteration) {
-			this.handleLost(this.currentField / 2)
+		if (!this.wonFields.includes(this.currentField ) && !this.isFirstIteration) {
+			this.handleLost(this.currentField )
 		}
 
 		const element = this.getCurrentField();
@@ -109,8 +93,8 @@ export class GameComponent implements OnInit {
 	}
 
 	fieldClicked(id: number): void {
-		if (id === this.currentField / 2) {
-			this.handleWin(this.currentField / 2);
+		if (id === this.currentField ) {
+			this.handleWin(this.currentField );
 		}
 	}
 
@@ -129,25 +113,33 @@ export class GameComponent implements OnInit {
 	}
 
 	getRandomNumber(): number {
-		return Math.round((Math.random() * 199))
+		return Math.round((Math.random() * 99))
 	}
 
 	hanldeEndOfTheGame():void {
-		clearTimeout(this.timerId)
 		if (this.wonFields.length === 10) {
 			alert('Congrats')
 		} else { 
 			alert('You loose')
 		}
+		this.resetAllGameData();
 	}
-
-	get radioArr() {
-		return this.gameBoard.get('radioArray') as FormArray;
+	resetAllGameData(): void {
+		clearTimeout(this.timerId)
+		this.fields = [];
+		this.isGameActive = false;
+		this.isFirstIteration = true;
+		this.wonFields = [];
+		this.lostFields = [];
 	}
 
 	get isGameEnded(): boolean {
 		return this.wonFields.length === 10 || this.lostFields.length === 10;
 	}
 	
+	ngOnDestroy(): void {
+		this.alive = false
+		this.resetAllGameData();
+	}
 }
 

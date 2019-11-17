@@ -5,12 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-
-    constructor() { }
-
-    ngOnInit() {
-        console.log(123)
-    }
-
+export class HomeComponent{
 }

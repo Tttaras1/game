@@ -1,21 +1,13 @@
 <app-game-settings> </app-game-settings>
 
-<form [formGroup]="gameBoard" class="game-board">
+<div class="game-board">
     SCORE:
     <br/>
     {{wonFields.length}}:{{lostFields.length}}
-    <div formArrayName="radioArray" #boardRef>
+    <div #boardRef>
         <ng-container *ngFor="let field of fields; let i=index">
-            <label (click)="fieldClicked(field.id)" [for]="field.id" class="game-board__card-container"> 
-
-            </label>
-            <input 
-                [id]="field.id"
-                type="radio"
-                name="radioButton"
-                value="{{'button'+i}}"
-                [formControl]="radioArr.controls[i]"
-                hidden="true">
+            <div (click)="fieldClicked(field.id)" class="game-board__card-container"> 
+            </div>
         </ng-container>
     </div>
-</form>
+</div>

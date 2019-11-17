@@ -1,0 +1,34 @@
+.list-container {
+    margin: 0 auto;
+    width: 500px;
+    margin: 10px
+
+    &__header {
+        color: #ccc;       
+    }
+
+    &__link {
+        color: #1c1c1c;
+    }
+
+    &__wrapper {
+        color: #ccc;
+        list-style-type: none;
+
+        &-item {
+            position: relative;
+            font: bold italic 45px/1.5 Helvetica, Verdana, sans-serif;
+            margin-bottom: 20px;
+        }
+
+        &-text {
+            font: 16px/1.5 Helvetica, sans-serif;
+            padding-left: 60px;
+            color: #555;
+        }
+
+        &-number {
+            position: absolute;
+        }
+    }
+}

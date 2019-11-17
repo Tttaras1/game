@@ -11,7 +11,7 @@ export class GameSettingsComponent implements OnInit {
 	
 	constructor(private gameService: GameService) {}
 
-	settings: FormGroup;
+	public settings: FormGroup;
 
 	ngOnInit() {
 		this.settings = new FormGroup({
