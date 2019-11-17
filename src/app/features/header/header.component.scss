@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #2e2e2e;
+    padding: 0 16px;
+    z-index: 1000;
+    margin-bottom: 0;
+    min-height: 40px;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+
+    &__logo {
+        height: 25px;
+        display: inline-block;
+        color: #fff;
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
+
+        &--active {
+            border-bottom: 1px solid #fff;
+        }
+    }
+
+    &__link {
+        height: 25px;
+        display: inline-block;
+        color: #fff;
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
+
+        &--active {
+            border-bottom: 1px solid #fff;
+        }
+    }
+}
