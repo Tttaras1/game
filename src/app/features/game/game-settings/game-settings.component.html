@@ -1,10 +1,22 @@
 
-<form [formGroup]="settings" class="form-settings">
+<form [formGroup]="settings" class="form-settings" (ngSubmit)="startGame()">
 
     <div class="form-settings__time">
         <label for="time">Time:</label>
-        <input id="time" formControlName="time" type="text">
-        {{settings.controls.time.valid}}
+        <input
+            id="time"
+            formControlName="time"
+            type="text"
+            class="form-settings__input"
+            [ngClass]="{
+                'form-settings__input--not-empty': timeControl.value,
+                'form-settings__input--error': !timeControl.valid && timeControl.touched
+            }">
+        <app-error-message [control]="timeControl" [form]="settings"></app-error-message>
     </div>
-    <app-error-message [control]="timeControl" [form]="settings"></app-error-message>
+    <div class="form-settings__start">
+        <input
+            type="submit"
+            class="form-settings__start-button" value="Start">
+    </div>
 </form>

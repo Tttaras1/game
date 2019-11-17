@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-game-settings',
@@ -8,6 +9,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class GameSettingsComponent implements OnInit {
 	
+	constructor(private gameService: GameService) {}
+
 	settings: FormGroup;
 
 	ngOnInit() {
@@ -18,6 +21,20 @@ export class GameSettingsComponent implements OnInit {
 				Validators.max(2000),
 			])
 		})
+		if (this.gameService.time) {
+			const time = this.gameService.time;
+			this.timeControl.patchValue(time);
+		}
+	}
+
+	startGame(): void {
+		if (this.settings.invalid) {
+			this.timeControl.markAsTouched();
+			return;
+		}
+
+		this.gameService.setTime(this.timeControl.value)
+		this.gameService.gameStarted.next(true);
 	}
 
 	get timeControl (): FormControl {
