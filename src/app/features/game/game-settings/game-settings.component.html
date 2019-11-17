@@ -1,0 +1,10 @@
+
+<form [formGroup]="settings" class="form-settings">
+
+    <div class="form-settings__time">
+        <label for="time">Time:</label>
+        <input id="time" formControlName="time" type="text">
+        {{settings.controls.time.valid}}
+    </div>
+    <app-error-message [control]="timeControl" [form]="settings"></app-error-message>
+</form>

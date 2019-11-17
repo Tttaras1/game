@@ -1,0 +1,22 @@
+.validators {
+    line-height: 18px;
+    font-size: 14px;
+    color: #e30b5d;
+    font-weight: 500;
+    margin-top: 5px;
+    white-space: nowrap;
+    &__items {
+        margin: 0;
+
+        &.left {
+            text-align: left;
+        }
+        &.center {
+            text-align: center;
+        }
+        &.right {
+            margin: 0;
+            text-align: right;
+        }
+    }
+}

@@ -1,0 +1,6 @@
+
+<div *ngIf="control.errors && control.touched" class="validators">
+    <p *ngFor='let key of errors' class="validators__items">
+        {{errorMessage[key]}}
+    </p>
+</div>
