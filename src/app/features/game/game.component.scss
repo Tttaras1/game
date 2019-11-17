@@ -1,6 +1,7 @@
 .game-board {
     width: 660px;
     padding: 50px;
+    margin: 0 auto;
 
     &__card-container {
         display: inline-block;
@@ -12,15 +13,15 @@
         cursor: pointer;
 
         &--active {
-            background-color: yellow !important;
-        }
-
-        &--win {
-            background-color: green;
+            background-color: yellow;
         }
 
         &--lost{
             background-color: red;
+        }
+
+        &--win {
+            background-color: green;
         }
 
         &:hover {

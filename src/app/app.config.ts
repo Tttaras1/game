@@ -5,6 +5,6 @@ export enum NAVIGATE {
 
 export enum ERROR_MESSAGES {
     required = 'This field is required!',
-    min = 'Should be more than 0',
+    min = 'Should be more than 200',
     max= 'Should be less than 5000',
 }

@@ -17,8 +17,8 @@ export class GameSettingsComponent implements OnInit {
 		this.settings = new FormGroup({
 			'time': new FormControl('', [
 				Validators.required,
-				Validators.min(1),
-				Validators.max(2000),
+				Validators.min(300),
+				Validators.max(5000),
 			])
 		})
 		if (this.gameService.time) {
