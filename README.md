@@ -2,4 +2,4 @@
 
 Test task for ThePerson company.
 
-Please go to develop branch to view the game.
+Please go to development branch to view the game.
