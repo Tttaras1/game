@@ -8,11 +8,11 @@ import { takeWhile } from 'rxjs/operators';
 	styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-	private alive = true;
-	private isGameActive = false;
-	private fields = [];
-	private isModalActive: boolean = false;
-	private modalText: string;
+	public alive = true;
+	public fields = [];
+	public modalText: string;
+	public isModalActive: boolean = false;
+	public isGameActive = false;
 	public currentField: number = 0;
 	public lostFields: number[] = [];
 	public wonFields: number[] = [];
@@ -31,14 +31,14 @@ export class GameComponent implements OnInit {
 
 	initSubscriptions() {
 		this.GameService.gameStarted
-		.pipe(takeWhile(() => this.alive))
-		.subscribe((status) => {
-			if (this.isGameActive && status) {
-				return;
-			}
-			this.isGameActive = status;
-			this.initBoard();
-		})
+			.pipe(takeWhile(() => this.alive))
+			.subscribe((status) => {
+				if (this.isGameActive && status) {
+					return;
+				}
+				this.isGameActive = status;
+				this.initBoard();
+			})
 	}
 
 	initBoard() {
@@ -80,7 +80,7 @@ export class GameComponent implements OnInit {
 		}
 
 		if (!this.wonFields.includes(this.currentField ) && !this.isFirstIteration) {
-			this.handleLost(this.currentField )
+			this.handleLost()
 		}
 
 		const element = this.getCurrentField();
@@ -98,7 +98,7 @@ export class GameComponent implements OnInit {
 		}
 	}
 
-	handleLost(id: number) {
+	handleLost(): void {
 		this.getField([this.currentField])
 			.classList.add('game-board__card-container--lost');
 		this.lostFields.push(this.currentField)

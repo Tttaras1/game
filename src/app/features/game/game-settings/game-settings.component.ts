@@ -33,7 +33,7 @@ export class GameSettingsComponent implements OnInit {
 			return;
 		}
 
-		this.gameService.setTime(this.timeControl.value)
+		this.gameService.setTime(this.timeControl.value);
 		this.gameService.gameStarted.next(true);
 	}
 

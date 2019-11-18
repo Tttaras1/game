@@ -22,4 +22,10 @@ describe('ModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('confirmClicked function emited data', () => {
+    spyOn(component.onConfirmClicked, 'emit');
+    component.confirmClicked();
+    expect(component.onConfirmClicked.emit).toHaveBeenCalled();
+  })
 });
