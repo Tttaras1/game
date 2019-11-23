@@ -1,5 +1,5 @@
 # 10x10 game
 
-Test task for ThePerson company.
+Test task for Comparus company.
 
 Please go to development branch to view the game.
